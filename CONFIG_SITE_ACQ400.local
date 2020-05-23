@@ -17,7 +17,7 @@ PVA_PY_HOST_ARCH = linux-x86_64
 PVA_PY_SETUP_SH = $(HOME)/PROJECTS/EPICS/pvaPy/bin/linux-x86_64/pvapy_setup_full.3.7.sh
 
 ifeq ($(T_A),linux-arm)
-BR_BASE_HDR = /home/pgm/PROJECTS/acq400_buildroot/output/host/arm-buildroot-linux-gnueabihf/sysroot
+BR_BASE_HDR = $(HOME)/PROJECTS/acq400_buildroot/output/host/arm-buildroot-linux-gnueabihf/sysroot
 BR_BASE_LIB = $(HOME)/PROJECTS/acq400_buildroot/output/target
 PVA_PY_CPPFLAGS = -I$(BR_BASE_HDR)/usr/include -I$(BR_BASE_HDR)/usr/include/python3.8
 PVA_PY_LDFLAGS = -L$(BR_BASE_LIB)/lib -L$(BR_BASE_LIB)/usr/lib

@@ -41,7 +41,7 @@ endif
 
 # Build the Python pvaccess loadable library
 
-LOADABLE_LIBRARY_HOST += pvaccess
+LOADABLE_LIBRARY += pvaccess
 
 # Disable 'lib' prefix
 LOADABLE_SHRLIB_PREFIX = 

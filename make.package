@@ -1,0 +1,31 @@
+#!/bin/bash
+# EPICSV7 pvaPy .. python support 
+DC=$(date +%y%m%d%H%M)
+SEQ=91
+PKG=pvaPy
+PACKAGES=../../PACKAGES.OPT
+
+
+
+rm -Rf opkg/*
+mkdir -p release opkg/lib opkg/examples opkg/test opkg/etc/profile.d
+cp lib/python/3.8/linux-arm/pvaccess.so opkg/lib
+cp examples/* opkg/examples
+cp test/* opkg/test
+cp pvapy.sh opkg/etc/profile.d
+
+
+cat - > opkg/$PKG.init <<EOF 
+#!/bin/sh
+echo +++ $PKG.init
+(cd /usr/local/lib; for so in /usr/local/$PKG/lib/*.so; do ln -s \$so; done)
+cp /usr/local/$PKG/etc/profile.d/* /etc/profile.d
+EOF
+chmod a+rx opkg/$PKG.init
+
+IMG=${SEQ}-${PKG}-${DC}.ovl
+mksquashfs opkg/* release/$IMG
+ls -l release/$IMG
+rm -f ${PACKAGES}/${SEQ}-${PKG}*
+cp release/$IMG ${PACKAGES}
+
